@@ -8,9 +8,9 @@ import (
 )
 
 type PetRepository struct {
-	mu       sync.RWMutex
-	pets     map[uint32]*model.Pet
-	nextID   uint32
+	mu     sync.RWMutex
+	pets   map[uint32]*model.Pet
+	nextID uint32
 }
 
 func NewPetRepository() *PetRepository {
