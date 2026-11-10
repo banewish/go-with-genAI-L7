@@ -55,7 +55,9 @@ func (r *PetRepository) List(offset, limit int, speciesFilter string) []*model.P
 	var results []*model.Pet
 	for _, pet := range r.pets {
 		if speciesFilter == "" || pet.Species == speciesFilter {
-			results = append(results, pet)
+			// Copy the pet to avoid race conditions
+			petCopy := *pet
+			results = append(results, &petCopy)
 		}
 	}
 
