@@ -4,7 +4,12 @@
 // organise the rest of the code (model, repository, handler, middleware) as you like.
 package app
 
-import "net/http"
+import (
+	"net/http"
+
+	"homework/internal/handler"
+	"homework/internal/repository"
+)
 
 // NewRouter must return a fully configured HTTP handler for your resource.
 //
@@ -15,7 +20,6 @@ import "net/http"
 //
 // TODO: replace this stub with your implementation.
 func NewRouter() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.Error(w, "not implemented", http.StatusNotImplemented)
-	})
+	repo := repository.NewPetRepository()
+	return handler.NewPetHandler(repo)
 }
