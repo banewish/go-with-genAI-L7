@@ -9,6 +9,7 @@ import (
 
 	"homework/internal/handler"
 	"homework/internal/repository"
+	"gorm.io/gorm"
 )
 
 // NewRouter must return a fully configured HTTP handler for your resource.
@@ -22,4 +23,11 @@ import (
 func NewRouter() http.Handler {
 	repo := repository.NewPetRepository()
 	return handler.NewPetHandler(repo)
+}
+
+// NewRouterWithDB creates a router with PostgreSQL database connection
+func NewRouterWithDB(db *gorm.DB) http.Handler {
+	bookRepo := repository.NewGormBookRepository(db)
+	bookHandler := handler.NewBookHandler(bookRepo)
+	return bookHandler
 }
